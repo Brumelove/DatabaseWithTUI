@@ -4,11 +4,13 @@ import TUIO.*; //Tangible User Interface
 TuioProcessing client;
 TuioCodeService tuioCodeService;
 CodeDataSource codeDataSource;
+DisplayService displayService;
 
 void setup() {
   client=new TuioProcessing(this); //Instantiate the TUIO Client Library on this Application
   tuioCodeService = new TuioCodeService();
   codeDataSource = new CodeDataSource();
+  displayService = new DisplayService();
   codeDataSource.parse();
   size(800, 600);
   noLoop();
@@ -20,7 +22,15 @@ void draw()
 }
 
 void addTuioObject(TuioObject tobj) {
-  println("add obj "+tobj.getSymbolID()+" ("+tobj.getSessionID()+") "+tobj.getX()+" "+tobj.getY()+" "+tobj.getAngle());
+  //println("add obj "+tobj.getSymbolID()+" ("+tobj.getSessionID()+") "+tobj.getX()+" "+tobj.getY()+" "+tobj.getAngle());
+  // When a TUIO is add display the text
+  CodeItem code = codeDataSource.getTextById(tobj.getSymbolID());
+  String codeText = code.getCodeText();
+  print(code);
+  displayService.render(codeText);
+  tuioCodeService.write(codeText);
+  tuioCodeService.save();
+
 }
 
 

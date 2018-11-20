@@ -3,8 +3,14 @@ public class CodeItem {
     public String codetext;
     public int id;
 
+
+    public CodeItem(int id,String codetext){
+        this.id = id;
+        this.codetext = codetext;
+    }
+
     public void setId(int id){
-        id = id;
+        this.id = id;
     } 
 
     public int getId(){
@@ -12,7 +18,7 @@ public class CodeItem {
     }
 
     public void setCodeText(String codetext){
-        codetext = codetext;
+        this.codetext = codetext;
     }
 
     public String getCodeText(){
@@ -27,12 +33,18 @@ public class CodeDataSource {
     private JSONArray jsonObject;
     public String dataJSONPath = "";
     private String jsonPath = "code.json";
+    private HashMap<Integer, CodeItem> hashMapData;
 
     public CodeDataSource(){
         // Set the path to the JSON file
         dataJSONPath = sketchPath("data/");
         jsonObject = loadJSONArray(dataJSONPath+jsonPath);
+        hashMapData = new HashMap<Integer,CodeItem>();
 
+    }
+    
+    public CodeItem getTextById(int symbolId){
+        return hashMapData.get(symbolId);
     }
 
     public void parse(){
@@ -40,12 +52,10 @@ public class CodeDataSource {
        
             for(int code = 0; code < jsonObject.size(); code++){
                 JSONObject currentCodeObject = jsonObject.getJSONObject(code);
-                print(currentCodeObject.getString("code"));
+                CodeItem item = new CodeItem(currentCodeObject.getInt("symbolID"), currentCodeObject.getString("code"));
+                hashMapData.put(code,item);
             }
 
         }
     }
-
-
-
 }
