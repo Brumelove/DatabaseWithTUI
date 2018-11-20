@@ -2,9 +2,14 @@ import TUIO.*; //Tangible User Interface
 
 
 TuioProcessing client;
+TuioCodeService tuioCodeService;
+CodeDataSource codeDataSource;
 
 void setup() {
   client=new TuioProcessing(this); //Instantiate the TUIO Client Library on this Application
+  tuioCodeService = new TuioCodeService();
+  codeDataSource = new CodeDataSource();
+  codeDataSource.parse();
   size(800, 600);
   noLoop();
 }
