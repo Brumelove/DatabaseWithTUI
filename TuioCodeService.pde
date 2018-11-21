@@ -10,12 +10,15 @@
         printerWriter = createWriter(sketchPath("code/")+ filename);
     }
 
+    
+
     public void write(String textCode){
-        printerWriter.println(textCode);
+        printerWriter.print(textCode);
+        printerWriter.flush();
     }
 
     public void save(){
-        printerWriter.flush();
+        
         printerWriter.close();
     }
 

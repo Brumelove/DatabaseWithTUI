@@ -52,8 +52,9 @@ public class CodeDataSource {
        
             for(int code = 0; code < jsonObject.size(); code++){
                 JSONObject currentCodeObject = jsonObject.getJSONObject(code);
-                CodeItem item = new CodeItem(currentCodeObject.getInt("symbolID"), currentCodeObject.getString("code"));
-                hashMapData.put(code,item);
+                println("ID is :"+ currentCodeObject.getInt("id"));
+                CodeItem item = new CodeItem(currentCodeObject.getInt("id"), currentCodeObject.getString("code"));
+                hashMapData.put(item.getId(),item);
             }
 
         }
