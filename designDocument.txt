@@ -1,0 +1,8 @@
+playMenu page (id = 0)----> instructionPage (id = 1) -----> displays the database code on the screen, creates minimum of 
+3tables,
+create an ERD and show the relationship between the tables. Let the primaryy and foreign keys be green to show our relationship.
+for example id 2 creates a database, id 3 creates a table with all its rows and columns and primary keys, id 4 creates second table, 
+id 5 creates the last table, id 6 deletes a row of table 1, id 7 adds a row of table1, id 8, drops a table. id 9 displays the 
+remaining tables
+id 10 links the remaining tables and displays their primary and foreign key.
+deadline is wednesday
