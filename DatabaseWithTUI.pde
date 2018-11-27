@@ -22,7 +22,7 @@ void draw()
 {
   background(100);
   sceneManager.activeScene().render();
-  noLoop();
+  noLoop();  // Wasteful method as our application is mostly static
 }
 
 void addTuioObject(TuioObject tobj) {
