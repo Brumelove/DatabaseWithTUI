@@ -6,8 +6,10 @@ TuioCodeService tuioCodeService;
 CodeDataSource codeDataSource;
 SceneManager sceneManager;
 SQLEditor sqlScene;
-PGraphics graphicsContext;
+PGraphics pg; // Graphics Context
 Colors colors;
+PFont font;
+
 
 
 void setup() {
@@ -19,8 +21,9 @@ void setup() {
   sceneManager.setScene(sqlScene);
   codeDataSource.parse();
   colors = new Colors();
-  size(1024, 768);
-  graphicsContext = createGraphics(1024, 768); // Set the Graphics Context so we can reuse to draw
+  size(1280, 720);
+  //Setup the Font
+  pg = createGraphics(1280, 720); // Set the Graphics Context so we can reuse to draw
 }
 
 void draw()

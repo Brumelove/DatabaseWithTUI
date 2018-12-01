@@ -29,7 +29,7 @@ public class MenuScene implements IScene {
 
     if(fudicialMarkerDisplayed == SQL_EDITOR_SCENE_MARKER){
        SQLEditor sqlScene = new SQLEditor();
-       sceneManager.setScene(scene);
+       sceneManager.setScene(sqlScene);
     }
   }
 

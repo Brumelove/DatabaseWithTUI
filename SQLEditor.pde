@@ -1,15 +1,23 @@
 public class SQLEditor implements IScene {
 
-  private final int HEADER_HEIGHT = 62;
-  private final int HEADER_TOP_PADDING = HEADER_HEIGHT / 2;
-  private final int HEADER_LEFT_PADDING = 20;
+  // Declare values for the Settings of the UI
+  private final float HEADER_HEIGHT = 62;
+  private final float HEADER_TOP_PADDING = HEADER_HEIGHT / 2;
+  private final float HEADER_LEFT_PADDING = 20;
+  private final float BUTTON_WIDTH = 76;
+  private final float BUTTON_HEIGHT = 46;
+  private final float RUNBUTTON_PADDING_RIGHT_OFFSET = BUTTON_WIDTH + 20; // Extra 50 margin
+  private final float BORDER_RADIUS = 5;
+
+  // Declare states for the Application depending on the state determines the what to render
+
 
   public SQLEditor() {
   }
 
   public void render() {
     renderHeader();
-    image(graphicsContext, 0, 0);
+    image(pg, 0, 0);
   }
 
   public void load() {
@@ -53,22 +61,41 @@ public class SQLEditor implements IScene {
   }
 
   public void renderHeader() {
-    graphicsContext.beginDraw();
+    pg.beginDraw();
     //Let's draw the reactangle first
-    graphicsContext.noStroke();
-    graphicsContext.fill(colors.WHITE);
-    graphicsContext.rect(0, 0, width, HEADER_HEIGHT); 
-    graphicsContext.endDraw();
+    pg.noStroke();
+    pg.fill(colors.WHITE);
+    pg.rect(0, 0, width, HEADER_HEIGHT); 
+    pg.endDraw();
     renderHeaderTitle();
+    renderRunButton();
   }
 
   public void renderHeaderTitle() {
     // Calculate the Y Offset and give padding
-    graphicsContext.beginDraw();
+    pg.beginDraw();
     // Write text offset to the padding top
-    graphicsContext.textSize(20);
-    graphicsContext.fill(colors.BLACK);
-    graphicsContext.text("SQL Editor", HEADER_LEFT_PADDING, HEADER_TOP_PADDING);
-    graphicsContext.endDraw();
+    font = createFont("Consolas", 20);
+    pg.textFont(font);
+    pg.fill(colors.BLACK);
+    pg.text("SQL Editor", HEADER_LEFT_PADDING, HEADER_TOP_PADDING);
+    pg.endDraw();
+  }
+
+  public void renderRunButton() {
+    // Draw the button at the end of the width but make an offset
+    pg.beginDraw();
+    float offset = width - RUNBUTTON_PADDING_RIGHT_OFFSET;
+    pg.noStroke();
+    pg.fill(colors.GREEN);
+    pg.rect(offset, HEADER_TOP_PADDING - (BUTTON_HEIGHT / 2), BUTTON_WIDTH, BUTTON_HEIGHT, BORDER_RADIUS);
+    pg.endDraw();
+
+    pg.beginDraw();
+    pg.fill(colors.WHITE);
+    font = createFont("Consolas", 19);
+    pg.textFont(font);
+    pg.text("Run", offset + 20, HEADER_TOP_PADDING + (BUTTON_HEIGHT - 40));
+    pg.endDraw();
   }
 }
