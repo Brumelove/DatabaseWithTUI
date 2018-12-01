@@ -17,3 +17,10 @@ public interface IScene
   public void removeTuioBlobHook(TuioBlob tblb);
   public void refreshHook(TuioTime frameTime);
 }
+
+public interface IRenderable {
+  /**
+  * @description Any class that implements this interface is responsible for rendering to the screen 
+  **/
+  public void render();
+}

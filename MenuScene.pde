@@ -3,6 +3,7 @@ public class MenuScene implements IScene {
   private PImage menuImage;
   
   private final int INSTRUCTION_PAGE_MARKER = 0;
+  private final int SQL_EDITOR_SCENE_MARKER = 1;
 
   public void render() {
     image(menuImage, 0, 0);
@@ -24,6 +25,11 @@ public class MenuScene implements IScene {
         // Use the SceneManager to Change scene we can use here since this is all a PApplet
         InstructionScene scene = new InstructionScene();
         sceneManager.setScene(scene);
+    }
+
+    if(fudicialMarkerDisplayed == SQL_EDITOR_SCENE_MARKER){
+       SQLEditor sqlScene = new SQLEditor();
+       sceneManager.setScene(scene);
     }
   }
 

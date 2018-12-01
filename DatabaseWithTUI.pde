@@ -5,17 +5,22 @@ TuioProcessing client;
 TuioCodeService tuioCodeService;
 CodeDataSource codeDataSource;
 SceneManager sceneManager;
-MenuScene menuScene;
+SQLEditor sqlScene;
+PGraphics graphicsContext;
+Colors colors;
+
 
 void setup() {
   client=new TuioProcessing(this); //Instantiate the TUIO Client Library on this Application
   tuioCodeService = new TuioCodeService();
   codeDataSource = new CodeDataSource();
   sceneManager = new SceneManager();
-  menuScene = new MenuScene();
-  sceneManager.setScene(menuScene);
+  sqlScene = new SQLEditor();
+  sceneManager.setScene(sqlScene);
   codeDataSource.parse();
-  size(800, 600);
+  colors = new Colors();
+  size(1024, 768);
+  graphicsContext = createGraphics(1024, 768); // Set the Graphics Context so we can reuse to draw
 }
 
 void draw()
