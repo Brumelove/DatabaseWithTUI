@@ -15,6 +15,6 @@ public class SceneManager {
   }
 
   public IScene activeScene() {
-    return currentScene; //<>//
+    return currentScene;
   }
 }

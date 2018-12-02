@@ -2,7 +2,7 @@
     {
         "id": 3,
         "symbolID": 3,
-        "code": " public class App { "
+        "code": " Select * from appriver"
     },
     {
         "id": 4,

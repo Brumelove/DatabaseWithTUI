@@ -14,11 +14,11 @@ public class SQLEditor implements IScene {
   private final float CODE_EDITOR_PADDING_LEFT = 40;
   private final float CODE_EDITOR_PADDING_TOP = CODE_EDITOR_Y_OFFSET + 30 + CODE_TEXT_SIZE;
   private final float CODE_EDITOR_TEXTZONE = MARGIN_BETWEEN_SCREEN;
-  
+
 
   // Declare states for the Application depending on the state determines the what to render
 
-  public String codeText = "SELECT * FROM DATABASE;";
+  public String codeText = "";
 
   public SQLEditor() {
   }
@@ -29,6 +29,7 @@ public class SQLEditor implements IScene {
   }
 
   public void load() {
+    
   }
 
   public void unload() {
@@ -36,6 +37,13 @@ public class SQLEditor implements IScene {
   }
 
   public void addTuioObjectHook(TuioObject tobj) {
+    int fudicialMarkerDisplayed = tobj.getSymbolID(); //<>//
+    CodeItem item = codeDataSource.getTextById(fudicialMarkerDisplayed);
+    if(item != null){
+       codeText = item.getCodeText(); 
+    }
+    // let's update the loop once
+    redraw();
   }
 
   public void removeTuioObjectHook(TuioObject tobj) {
@@ -120,14 +128,13 @@ public class SQLEditor implements IScene {
     pg.fill(colors.BLACK);
     pg.rect(0, CODE_EDITOR_Y_OFFSET, MARGIN_BETWEEN_SCREEN, (height - CODE_EDITOR_Y_OFFSET));
     pg.endDraw();
-    
+
     pg.beginDraw();
     font = createFont("Consolas", 14);
     pg.textFont(font);
     // Draw the text
     pg.fill(colors.WHITE);
-    pg.text(codeText,CODE_EDITOR_PADDING_LEFT, CODE_EDITOR_PADDING_TOP);
+    pg.text(codeText, CODE_EDITOR_PADDING_LEFT, CODE_EDITOR_PADDING_TOP);
     pg.endDraw();
-    
   }
 }

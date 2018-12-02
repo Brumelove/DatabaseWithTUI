@@ -1,7 +1,7 @@
 
 public class CodeItem {
-  public String codetext;
-  public int id;
+  private String codetext;
+  private int id;
 
 
   public CodeItem(int id, String codetext) {
@@ -49,7 +49,6 @@ public class CodeDataSource {
 
       for (int code = 0; code < jsonObject.size(); code++) {
         JSONObject currentCodeObject = jsonObject.getJSONObject(code);
-        println("ID is :"+ currentCodeObject.getInt("id"));
         CodeItem item = new CodeItem(currentCodeObject.getInt("id"), currentCodeObject.getString("code"));
         hashMapData.put(item.getId(), item);
       }
