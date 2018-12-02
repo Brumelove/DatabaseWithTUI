@@ -8,9 +8,17 @@ public class SQLEditor implements IScene {
   private final float BUTTON_HEIGHT = 46;
   private final float RUNBUTTON_PADDING_RIGHT_OFFSET = BUTTON_WIDTH + 20; // Extra 50 margin
   private final float BORDER_RADIUS = 5;
+  private final float CODE_EDITOR_Y_OFFSET = HEADER_HEIGHT + 2; // the 2 px will be used to render a rect to serve as a border for the header section
+  private final float MARGIN_BETWEEN_SCREEN = (width / 2) - 25; // Each distance between the screens will be 50
+  private final float CODE_TEXT_SIZE = 14;
+  private final float CODE_EDITOR_PADDING_LEFT = 40;
+  private final float CODE_EDITOR_PADDING_TOP = CODE_EDITOR_Y_OFFSET + 30 + CODE_TEXT_SIZE;
+  private final float CODE_EDITOR_TEXTZONE = MARGIN_BETWEEN_SCREEN;
+  
 
   // Declare states for the Application depending on the state determines the what to render
 
+  public String codeText = "SELECT * FROM DATABASE;";
 
   public SQLEditor() {
   }
@@ -67,8 +75,15 @@ public class SQLEditor implements IScene {
     pg.fill(colors.WHITE);
     pg.rect(0, 0, width, HEADER_HEIGHT); 
     pg.endDraw();
+
+    pg.beginDraw();
+    pg.fill(colors.WHITISH);
+    pg.rect(0, HEADER_HEIGHT, width, 2 /*2px after Height of Header*/);
+    pg.endDraw();
+
     renderHeaderTitle();
     renderRunButton();
+    renderCodeEditor();
   }
 
   public void renderHeaderTitle() {
@@ -97,5 +112,22 @@ public class SQLEditor implements IScene {
     pg.textFont(font);
     pg.text("Run", offset + 20, HEADER_TOP_PADDING + (BUTTON_HEIGHT - 40));
     pg.endDraw();
+  }
+
+  public void renderCodeEditor() {
+    pg.beginDraw();
+    // We need to render the box 
+    pg.fill(colors.BLACK);
+    pg.rect(0, CODE_EDITOR_Y_OFFSET, MARGIN_BETWEEN_SCREEN, (height - CODE_EDITOR_Y_OFFSET));
+    pg.endDraw();
+    
+    pg.beginDraw();
+    font = createFont("Consolas", 14);
+    pg.textFont(font);
+    // Draw the text
+    pg.fill(colors.WHITE);
+    pg.text(codeText,CODE_EDITOR_PADDING_LEFT, CODE_EDITOR_PADDING_TOP);
+    pg.endDraw();
+    
   }
 }
