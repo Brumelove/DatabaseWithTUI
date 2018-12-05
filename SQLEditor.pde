@@ -1,5 +1,7 @@
 public class SQLEditor implements IScene {
 
+  // Markers
+  private final int MARKER_RUN_SQL_EXECUTE = 5;
   // Declare values for the Settings of the UI
   private final float HEADER_HEIGHT = 62;
   private final float HEADER_TOP_PADDING = HEADER_HEIGHT / 2;
@@ -14,9 +16,11 @@ public class SQLEditor implements IScene {
   private final float CODE_EDITOR_PADDING_LEFT = 40;
   private final float CODE_EDITOR_PADDING_TOP = CODE_EDITOR_Y_OFFSET + 30 + CODE_TEXT_SIZE;
   private final float CODE_EDITOR_TEXTZONE = MARGIN_BETWEEN_SCREEN;
+  
 
 
   // Declare states for the Application depending on the state determines the what to render
+  private boolean shouldRenderStatusBar = false;
 
   public String codeText = "";
 
@@ -29,19 +33,31 @@ public class SQLEditor implements IScene {
   }
 
   public void load() {
-    
   }
 
   public void unload() {
     //Unload the image
-  }
+  } //<>//
 
-  public void addTuioObjectHook(TuioObject tobj) {
-    int fudicialMarkerDisplayed = tobj.getSymbolID(); //<>//
-    CodeItem item = codeDataSource.getTextById(fudicialMarkerDisplayed);
-    if(item != null){
-       codeText = item.getCodeText(); 
+  public void addTuioObjectHook(TuioObject tobj) { //<>//
+    int fudicialMarkerDisplayed = tobj.getSymbolID(); 
+    if ( fudicialMarkerDisplayed != MARKER_RUN_SQL_EXECUTE) {
+      CodeItem item = codeDataSource.getTextById(fudicialMarkerDisplayed);
+      if (item != null) {
+        codeText = item.getCodeText();
+      }
+    } else {
+      // Execute the statement
+      try {
+        println("Execution Query");
+        int result = sqlservice.execute(codeText);
+        println("Result is " + result);
+      }
+      catch(SQLException e) {
+        println(e.getMessage());
+      }
     }
+
     // let's update the loop once
     redraw();
   }
@@ -134,7 +150,9 @@ public class SQLEditor implements IScene {
     pg.textFont(font);
     // Draw the text
     pg.fill(colors.WHITE);
-    pg.text(codeText, CODE_EDITOR_PADDING_LEFT, CODE_EDITOR_PADDING_TOP);
+    pg.text(codeText, CODE_EDITOR_PADDING_LEFT, CODE_EDITOR_PADDING_TOP, MARGIN_BETWEEN_SCREEN - 10, (height - CODE_EDITOR_Y_OFFSET));
     pg.endDraw();
   }
+  
+  
 }

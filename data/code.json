@@ -2,26 +2,6 @@
     {
         "id": 3,
         "symbolID": 3,
-        "code": " Select * from appriver"
-    },
-    {
-        "id": 4,
-        "symbolID": 4,
-        "code": " public App() {"
-    },
-    {
-        "id": 5,
-        "symbolID": 5,
-        "code": " System.out.print('hi');"
-    },
-    {
-        "id": 6,
-        "symbolID": 6,
-        "code": " } "
-    },
-    {
-        "id": 7,
-        "symbolID": 7,
-        "code": " } "
+        "code": "insert into contacts values (4, 'Brume','Love','brume@gmail.com','08162985501');"
     }
 ]

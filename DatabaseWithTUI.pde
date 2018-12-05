@@ -1,14 +1,25 @@
+import org.sqlite.*;
+import org.sqlite.core.*;
+import org.sqlite.util.*;
+import org.sqlite.date.*;
+import org.sqlite.javax.*;
+import org.sqlite.jdbc4.*;
+import org.sqlite.jdbc3.*;
+
 import TUIO.*; //Tangible User Interface
+
 
 
 TuioProcessing client;
 TuioCodeService tuioCodeService;
 CodeDataSource codeDataSource;
 SceneManager sceneManager;
-SQLEditor sqlScene;
+MenuScene menuScene;
 PGraphics pg; // Graphics Context
 Colors colors;
 PFont font;
+SQLiteService sqlservice;
+//SQLEditor sqlscene;
 
 
 
@@ -17,10 +28,19 @@ void setup() {
   tuioCodeService = new TuioCodeService();
   codeDataSource = new CodeDataSource();
   sceneManager = new SceneManager();
-  sqlScene = new SQLEditor();
-  sceneManager.setScene(sqlScene);
+  menuScene = new MenuScene();
+  //sqlscene = new SQLEditor();
+  sceneManager.setScene(menuScene);
   codeDataSource.parse();
   colors = new Colors();
+  try {
+    sqlservice = new SQLiteService(); // Construct the SQLService for our application
+    
+  }
+  catch(Exception e) {
+    print(e.getMessage());
+  }
+
   size(1280, 720);
   //Setup the Font
   pg = createGraphics(1280, 720); // Set the Graphics Context so we can reuse to draw

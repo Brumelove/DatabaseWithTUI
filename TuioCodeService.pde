@@ -1,4 +1,5 @@
 import java.io.*;
+                                                                                                                                                                                                           
 
 public class TuioCodeService {
 
@@ -7,7 +8,7 @@ public class TuioCodeService {
 
   public TuioCodeService() {
     // instantiate the Printer Writer
-    printerWriter = createWriter(sketchPath("code/")+ filename);
+    printerWriter = createWriter(sketchPath("sql/")+ filename);
   }
 
 
