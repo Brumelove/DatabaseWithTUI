@@ -14,28 +14,28 @@ TuioProcessing client;
 TuioCodeService tuioCodeService;
 CodeDataSource codeDataSource;
 SceneManager sceneManager;
-MenuScene menuScene;
+SplashScreen scene;
 PGraphics pg; // Graphics Context
 Colors colors;
 PFont font;
 SQLiteService sqlservice;
-//SQLEditor sqlscene;
+SQLEditor sqlscene;
 
 
 
 void setup() {
+  noLoop();  // Wasteful method as our application is mostly static
   client=new TuioProcessing(this); //Instantiate the TUIO Client Library on this Application
   tuioCodeService = new TuioCodeService();
   codeDataSource = new CodeDataSource();
   sceneManager = new SceneManager();
-  menuScene = new MenuScene();
-  //sqlscene = new SQLEditor();
-  sceneManager.setScene(menuScene);
+  scene = new SplashScreen();
+  sqlscene = new SQLEditor();
+  sceneManager.setScene(sqlscene);
   codeDataSource.parse();
   colors = new Colors();
   try {
     sqlservice = new SQLiteService(); // Construct the SQLService for our application
-    
   }
   catch(Exception e) {
     print(e.getMessage());
@@ -50,7 +50,7 @@ void draw()
 {
   background(100);
   sceneManager.activeScene().render();
-  noLoop();  // Wasteful method as our application is mostly static
+  
 }
 
 void addTuioObject(TuioObject tobj) {

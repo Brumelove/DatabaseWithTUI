@@ -16,13 +16,20 @@ public class SQLEditor implements IScene {
   private final float CODE_EDITOR_PADDING_LEFT = 40;
   private final float CODE_EDITOR_PADDING_TOP = CODE_EDITOR_Y_OFFSET + 30 + CODE_TEXT_SIZE;
   private final float CODE_EDITOR_TEXTZONE = MARGIN_BETWEEN_SCREEN;
-  
+
+  private final float CODE_STATUS_OFFSET_Y = height;
+  private final float CODE_STATUS_HEIGHT = 50;
+
+  private String errorMessageText;
 
 
   // Declare states for the Application depending on the state determines the what to render
   private boolean shouldRenderStatusBar = false;
+  private boolean isSuccessful = false;
 
   public String codeText = "";
+  private int shouldElapse = 0;
+
 
   public SQLEditor() {
   }
@@ -30,36 +37,48 @@ public class SQLEditor implements IScene {
   public void render() {
     renderHeader();
     image(pg, 0, 0);
-  }
+  } //<>//
 
-  public void load() {
-  }
+  public void load() { //<>//
+  } //<>// //<>//
 
-  public void unload() {
+  public void unload() { //<>// //<>//
     //Unload the image
   } //<>//
 
   public void addTuioObjectHook(TuioObject tobj) { //<>//
-    int fudicialMarkerDisplayed = tobj.getSymbolID(); 
-    if ( fudicialMarkerDisplayed != MARKER_RUN_SQL_EXECUTE) {
-      CodeItem item = codeDataSource.getTextById(fudicialMarkerDisplayed);
-      if (item != null) {
-        codeText = item.getCodeText();
-      }
-    } else {
-      // Execute the statement
-      try {
-        println("Execution Query");
-        int result = sqlservice.execute(codeText);
-        println("Result is " + result);
-      }
-      catch(SQLException e) {
-        println(e.getMessage());
-      }
+    int millis = millis();
+    if ( millis >= shouldElapse && isSuccessful) {
+      shouldElapse = 0;
+      isSuccessful = false;
     }
+    if (!isSuccessful) {
+      int fudicialMarkerDisplayed = tobj.getSymbolID(); 
+      if ( fudicialMarkerDisplayed != MARKER_RUN_SQL_EXECUTE) {
+        CodeItem item = codeDataSource.getTextById(fudicialMarkerDisplayed);
+        if (item != null) {
+          codeText = item.getCodeText();
+        }
+      } else {
+        // Execute the statement
+        try {
+          println("Execution Query");
+          int result = sqlservice.execute(codeText);
+          if (result == 1) {
+            isSuccessful = true;
+            shouldElapse = millis() + 50000; // 50 Seconds 
+          }
+        }
+        catch(SQLException e) {
+          shouldRenderStatusBar = true;
+          errorMessageText = e.getMessage();
+          println(e.getMessage());
+        }
+      }
 
-    // let's update the loop once
-    redraw();
+      // let's update the loop once
+      redraw();
+    }
   }
 
   public void removeTuioObjectHook(TuioObject tobj) {
@@ -108,6 +127,13 @@ public class SQLEditor implements IScene {
     renderHeaderTitle();
     renderRunButton();
     renderCodeEditor();
+    if (shouldRenderStatusBar) {
+      renderStatusBar("error", errorMessageText);
+    }
+    
+    if(isSuccessful){
+     renderStatusBar("success", "The Query has been executed successfully"); 
+    }
   }
 
   public void renderHeaderTitle() {
@@ -153,6 +179,22 @@ public class SQLEditor implements IScene {
     pg.text(codeText, CODE_EDITOR_PADDING_LEFT, CODE_EDITOR_PADDING_TOP, MARGIN_BETWEEN_SCREEN - 10, (height - CODE_EDITOR_Y_OFFSET));
     pg.endDraw();
   }
-  
-  
+
+  public void renderStatusBar(String statusType, String message) {
+
+    pg.beginDraw();
+
+    if (statusType.equals("success")) {
+      pg.fill(colors.BLUE);
+    }
+
+    if (statusType.equals("error")) {
+      pg.fill(colors.RED);
+    }
+
+    pg.rect(0, (CODE_STATUS_OFFSET_Y - CODE_STATUS_HEIGHT), width, CODE_STATUS_HEIGHT);
+    pg.fill(colors.WHITE);
+    pg.text(message, 50, (CODE_STATUS_OFFSET_Y - CODE_STATUS_HEIGHT) + 30 );
+    pg.endDraw();
+  }
 }

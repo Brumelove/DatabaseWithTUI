@@ -1,32 +1,36 @@
-public class InstructionScene implements IScene {
-
-  private final int SQL_EDITOR_SCENE_MARKER = 1;
+public class SplashScreen implements IScene {
 
   private PImage menuImage;
+  
+  private final int INSTRUCTION_PAGE_MARKER = 0;
+  private final int SQL_EDITOR_SCENE_MARKER = 1;
 
   public void render() {
+    
     image(menuImage, 0, 0);
-    print(sceneManager);
-    noLoop();
+
+    // After some certain interval move to another scene
+    int millis = millis();
+    println(millis);
+    if( millis > 2000){
+        InstructionScene scene = new InstructionScene();
+        sceneManager.setScene(scene);
+    }
   }
 
   public void load() {
-
     // Load the image asset for the menu page
-    menuImage = loadImage("assets/ui/screen1.jpg");
+    loop();
+    menuImage = loadImage("assets/ui/splash.jpg");
   }
 
   public void unload() {
+    //Unload the image
+    menuImage = null;
   }
 
   public void addTuioObjectHook(TuioObject tobj) {
-
-    int fudicialMarkerDisplayed = tobj.getSymbolID();
-    if (fudicialMarkerDisplayed == SQL_EDITOR_SCENE_MARKER) {
-      // Use the SceneManager to Change scene we can use here since this is all a PApplet
-      SQLEditor sqlScene = new SQLEditor();
-      sceneManager.setScene(sqlScene);
-    }
+    
   }
 
   public void removeTuioObjectHook(TuioObject tobj) {
