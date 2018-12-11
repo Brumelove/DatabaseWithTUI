@@ -224,16 +224,29 @@ public class SQLEditor implements IScene {
 
   public void renderSingleErd(TableObject table, int index, int noOfColumns) {
     pg.beginDraw();
-    float calculatedHeight = (noOfColumns * ERD_FONT_SIZE) + ERD_FONT_SIZE + 35;
+    float calculatedHeight = (noOfColumns * 25) + 45;
     float xOffset = (MARGIN_BETWEEN_SCREEN + (index * ERD_UI_WIDTH)) + (index == 0 ? DISTANCE_BETWEEN_ERD / 2 : index * DISTANCE_BETWEEN_ERD);
     float yOffset = CODE_EDITOR_Y_OFFSET + 30;
     pg.fill(colors.WHITISH);
     pg.textSize(ERD_FONT_SIZE);
+
+    // Render the ERD BOX
     pg.rect( xOffset, yOffset, ERD_UI_WIDTH, calculatedHeight, 5);
     pg.fill(colors.BLACK);
+
+    // Render the ERD Tabe Name and Line
     pg.text(table.getName(), xOffset + 20, yOffset + 22.5);
     pg.line(xOffset, yOffset + 35, xOffset+ERD_UI_WIDTH, yOffset + 35);
-    println((MARGIN_BETWEEN_SCREEN + (index * ERD_UI_WIDTH)) + 30);
+
+    // Render the Column names
+    int columnCount = 1;
+    Iterator columnIterator = table.columnNames.iterator();
+    while (columnIterator.hasNext()) {
+      float columnOffsetY = (yOffset + (columnCount * 25) + 30);
+      String columnName = (String) columnIterator.next();
+      pg.text(columnName, xOffset + 15, columnOffsetY);
+      columnCount++;
+    }
     pg.endDraw();
   }
 }
