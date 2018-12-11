@@ -16,9 +16,13 @@ public class SQLEditor implements IScene {
   private final float CODE_EDITOR_PADDING_LEFT = 40;
   private final float CODE_EDITOR_PADDING_TOP = CODE_EDITOR_Y_OFFSET + 30 + CODE_TEXT_SIZE;
   private final float CODE_EDITOR_TEXTZONE = MARGIN_BETWEEN_SCREEN;
+  private final float DISTANCE_BETWEEN_ERD = 70;
+  private final float ERD_UI_WIDTH = 150;
+  private final float ERD_FONT_SIZE = 13;
 
   private final float CODE_STATUS_OFFSET_Y = height;
   private final float CODE_STATUS_HEIGHT = 50;
+
 
   private String errorMessageText;
 
@@ -33,14 +37,21 @@ public class SQLEditor implements IScene {
 
   public SQLEditor() {
   }
-
+ //<>//
   public void render() {
     renderHeader();
     image(pg, 0, 0);
   } //<>//
 
-  public void load() { //<>//
-  } //<>// //<>//
+  public void load() {
+    try {
+      renderERD();
+    }
+    catch(SQLException e)
+    {
+      println(e.getMessage());
+    }
+  } 
 
   public void unload() { //<>// //<>//
     //Unload the image
@@ -66,7 +77,7 @@ public class SQLEditor implements IScene {
           int result = sqlservice.execute(codeText);
           if (result == 1) {
             isSuccessful = true;
-            shouldElapse = millis() + 50000; // 50 Seconds 
+            shouldElapse = millis() + 50000; // 50 Seconds
           }
         }
         catch(SQLException e) {
@@ -130,9 +141,9 @@ public class SQLEditor implements IScene {
     if (shouldRenderStatusBar) {
       renderStatusBar("error", errorMessageText);
     }
-    
-    if(isSuccessful){
-     renderStatusBar("success", "The Query has been executed successfully"); 
+
+    if (isSuccessful) {
+      renderStatusBar("success", "The Query has been executed successfully");
     }
   }
 
@@ -195,6 +206,34 @@ public class SQLEditor implements IScene {
     pg.rect(0, (CODE_STATUS_OFFSET_Y - CODE_STATUS_HEIGHT), width, CODE_STATUS_HEIGHT);
     pg.fill(colors.WHITE);
     pg.text(message, 50, (CODE_STATUS_OFFSET_Y - CODE_STATUS_HEIGHT) + 30 );
+    pg.endDraw();
+  }
+
+  public void renderERD() throws SQLException {
+    sqlservice.readAllDatabase();
+    int indexCount = 0;
+    //Iterate all over the diagram and draw
+    Iterator<TableObject> iterator = tableManager.tableArray.iterator();
+    while (iterator.hasNext()) {
+      TableObject tableObjectRenderable = iterator.next();
+      int sizeofColumns = tableObjectRenderable.columnNames.size();
+      renderSingleErd(tableObjectRenderable, indexCount, sizeofColumns);
+      indexCount++; // Increment count
+    }
+  }
+
+  public void renderSingleErd(TableObject table, int index, int noOfColumns) {
+    pg.beginDraw();
+    float calculatedHeight = (noOfColumns * ERD_FONT_SIZE) + ERD_FONT_SIZE + 35;
+    float xOffset = (MARGIN_BETWEEN_SCREEN + (index * ERD_UI_WIDTH)) + (index == 0 ? DISTANCE_BETWEEN_ERD / 2 : index * DISTANCE_BETWEEN_ERD);
+    float yOffset = CODE_EDITOR_Y_OFFSET + 30;
+    pg.fill(colors.WHITISH);
+    pg.textSize(ERD_FONT_SIZE);
+    pg.rect( xOffset, yOffset, ERD_UI_WIDTH, calculatedHeight, 5);
+    pg.fill(colors.BLACK);
+    pg.text(table.getName(), xOffset + 20, yOffset + 22.5);
+    pg.line(xOffset, yOffset + 35, xOffset+ERD_UI_WIDTH, yOffset + 35);
+    println((MARGIN_BETWEEN_SCREEN + (index * ERD_UI_WIDTH)) + 30);
     pg.endDraw();
   }
 }
