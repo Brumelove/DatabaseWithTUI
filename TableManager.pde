@@ -9,7 +9,7 @@ public class TableManager {
     tableArray.add(table);
   }
 
-  public void clear(){
+  public void clear() {
     tableArray.clear();
   }
 }
@@ -41,5 +41,13 @@ public class TableObject {
 
   public String getForeignKey() {
     return foreignKey;
+  }
+
+  public boolean isFK(String name) {
+    return foreignKey.equals(name);
+  }
+  
+  public boolean hasFK(){
+     return foreignKey != null; 
   }
 }
