@@ -5,6 +5,7 @@ import org.sqlite.date.*;
 import org.sqlite.javax.*;
 import org.sqlite.jdbc4.*;
 import org.sqlite.jdbc3.*;
+import java.util.Iterator;
 
 import TUIO.*; //Tangible User Interface
 
@@ -20,7 +21,7 @@ Colors colors;
 PFont font;
 SQLiteService sqlservice;
 SQLEditor sqlscene;
-
+TableManager tableManager;
 
 
 void setup() {
@@ -30,27 +31,29 @@ void setup() {
   codeDataSource = new CodeDataSource();
   sceneManager = new SceneManager();
   scene = new SplashScreen();
-  sqlscene = new SQLEditor();
-  sceneManager.setScene(sqlscene);
+  
+  
   codeDataSource.parse();
   colors = new Colors();
+  size(1280, 720);
+  //Setup the Font
+  pg = createGraphics(1280, 720); // Set the Graphics Context so we can reuse to draw
+
   try {
     sqlservice = new SQLiteService(); // Construct the SQLService for our application
+    tableManager = new TableManager();
+    sceneManager.setScene(scene);
+
   }
   catch(Exception e) {
     print(e.getMessage());
   }
-
-  size(1280, 720);
-  //Setup the Font
-  pg = createGraphics(1280, 720); // Set the Graphics Context so we can reuse to draw
 }
 
 void draw()
 {
   background(100);
   sceneManager.activeScene().render();
-  
 }
 
 void addTuioObject(TuioObject tobj) {

@@ -244,7 +244,12 @@ public class SQLEditor implements IScene {
     while (columnIterator.hasNext()) {
       float columnOffsetY = (yOffset + (columnCount * 25) + 30);
       String columnName = (String) columnIterator.next();
-      pg.text(columnName, xOffset + 15, columnOffsetY);
+      if(table.hasFK() && table.isFK(columnName)){
+        pg.text(columnName + "- FK", xOffset + 15, columnOffsetY);
+      }else{
+        pg.text(columnName, xOffset + 15, columnOffsetY);
+      }
+      
       columnCount++;
     }
     pg.endDraw();
