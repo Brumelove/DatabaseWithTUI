@@ -6,7 +6,7 @@ import org.sqlite.javax.*;
 import org.sqlite.jdbc4.*;
 import org.sqlite.jdbc3.*;
 import java.util.Iterator;
-
+import processing.sound.*;
 import TUIO.*; //Tangible User Interface
 
 
@@ -24,13 +24,20 @@ SQLEditor sqlscene;
 TableManager tableManager;
 
 
+// Sound goes here
+SoundFile bootSound;
 void setup() {
   noLoop();  // Wasteful method as our application is mostly static
+  bootSound = new SoundFile(this,"assets/audio/boot.mp3");
+  bootSound.amp(1.0);
   client=new TuioProcessing(this); //Instantiate the TUIO Client Library on this Application
   tuioCodeService = new TuioCodeService();
   codeDataSource = new CodeDataSource();
   sceneManager = new SceneManager();
   scene = new SplashScreen();
+  
+  
+  
   
   
   codeDataSource.parse();
@@ -52,7 +59,7 @@ void setup() {
 
 void draw()
 {
-  background(100);
+  background(100); //<>//
   sceneManager.activeScene().render();
 }
 

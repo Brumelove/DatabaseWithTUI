@@ -37,11 +37,11 @@ public class SQLEditor implements IScene {
 
   public SQLEditor() {
   }
- //<>//
+ //<>// //<>//
   public void render() {
     renderHeader();
     image(pg, 0, 0);
-  } //<>//
+  } //<>// //<>//
 
   public void load() {
     try {
@@ -53,11 +53,11 @@ public class SQLEditor implements IScene {
     }
   } 
 
-  public void unload() { //<>// //<>//
+  public void unload() { //<>// //<>// //<>//
     //Unload the image
-  } //<>//
+  } //<>// //<>//
 
-  public void addTuioObjectHook(TuioObject tobj) { //<>//
+  public void addTuioObjectHook(TuioObject tobj) { //<>// //<>//
     int millis = millis();
     if ( millis >= shouldElapse && isSuccessful) {
       shouldElapse = 0;

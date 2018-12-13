@@ -1,4 +1,4 @@
-/** //<>//
+/** //<>// //<>// //<>// //<>//
  * @description A Simple SQLite Helper class
  **/
 
@@ -43,7 +43,7 @@ public class SQLiteService {
       tableObject.setName(tableName);
       //Fetch the columns
       ResultSet columnset = metadata.getColumns(null, null, tableName, null);
-      while (columnset.next()) { //<>//
+      while (columnset.next()) { //<>// //<>// //<>// //<>//
         tableObject.addColumnName(columnset.getString("COLUMN_NAME"));
         println(columnset.getString("COLUMN_NAME"));
       }
