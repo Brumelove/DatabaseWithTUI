@@ -1,4 +1,4 @@
-import org.sqlite.*;
+import org.sqlite.*; //<>//
 import org.sqlite.core.*;
 import org.sqlite.util.*;
 import org.sqlite.date.*;
@@ -6,7 +6,7 @@ import org.sqlite.javax.*;
 import org.sqlite.jdbc4.*;
 import org.sqlite.jdbc3.*;
 import java.util.Iterator;
-import processing.sound.*;
+import ddf.minim.*;
 import TUIO.*; //Tangible User Interface
 
 
@@ -25,21 +25,31 @@ TableManager tableManager;
 
 
 // Sound goes here
-SoundFile bootSound;
+Minim minim;
+
+AudioPlayer bootPlayer;
+AudioPlayer musicPlayer;
+int num_sound = 2;
+
 void setup() {
-  noLoop();  // Wasteful method as our application is mostly static
-  bootSound = new SoundFile(this,"assets/audio/boot.mp3");
-  bootSound.amp(1.0);
+
+  minim = new Minim(this);
+  bootPlayer = minim.loadFile("assets/audio/1.mp3");
+
+
+
   client=new TuioProcessing(this); //Instantiate the TUIO Client Library on this Application
   tuioCodeService = new TuioCodeService();
   codeDataSource = new CodeDataSource();
   sceneManager = new SceneManager();
   scene = new SplashScreen();
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
   codeDataSource.parse();
   colors = new Colors();
   size(1280, 720);
@@ -49,8 +59,8 @@ void setup() {
   try {
     sqlservice = new SQLiteService(); // Construct the SQLService for our application
     tableManager = new TableManager();
-    sceneManager.setScene(scene);
 
+    sceneManager.setScene(scene);
   }
   catch(Exception e) {
     print(e.getMessage());
@@ -59,7 +69,7 @@ void setup() {
 
 void draw()
 {
-  background(100); //<>//
+  background(100);
   sceneManager.activeScene().render();
 }
 

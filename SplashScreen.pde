@@ -23,9 +23,9 @@ public class SplashScreen implements IScene {
   public void load() {
     // Load the image asset for the menu page
     loop();
-    timerTick = millis() * 6;
+    timerTick = millis() * 5;
     menuImage = loadImage("assets/ui/splash.jpg");
-    bootSound.play();
+    bootPlayer.play();
   
   }
 

@@ -44,6 +44,8 @@ public class SQLEditor implements IScene {
   } //<>// //<>//
 
   public void load() {
+    musicPlayer = minim.loadFile("assets/audio/2.mp3");
+    musicPlayer.loop();
     try {
       renderERD();
     }
