@@ -3,7 +3,7 @@ public class MenuScene implements IScene {
   private PImage menuImage;
   
   private final int INSTRUCTION_PAGE_MARKER = 0;
-  private final int SQL_EDITOR_SCENE_MARKER = 1;
+  private final int SQL_EDITOR_SCENE_MARKER = 1; // Replace this with the Blue Marker
 
   public void render() {
     image(menuImage, 0, 0);
