@@ -4,6 +4,7 @@ public class SplashScreen implements IScene {
   
   private final int INSTRUCTION_PAGE_MARKER = 0;
   private final int SQL_EDITOR_SCENE_MARKER = 1;
+  private int timerTick = 0;
 
   public void render() {
     
@@ -11,8 +12,7 @@ public class SplashScreen implements IScene {
 
     // After some certain interval move to another scene
     int millis = millis();
-    println(millis);
-    if( millis > 2000){
+    if( millis >= timerTick){
         InstructionScene scene = new InstructionScene();
         sceneManager.setScene(scene);
     }
@@ -21,6 +21,7 @@ public class SplashScreen implements IScene {
   public void load() {
     // Load the image asset for the menu page
     loop();
+    timerTick = millis() * 8;
     menuImage = loadImage("assets/ui/splash.jpg");
   }
 
