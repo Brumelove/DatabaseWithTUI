@@ -6,3 +6,8 @@ id 5 creates the last table, id 6 deletes a row of table 1, id 7 adds a row of t
 remaining tables
 id 10 links the remaining tables and displays their primary and foreign key.
 deadline is wednesday
+
+Libraries Used
+
+SQLite
+SoundFile
