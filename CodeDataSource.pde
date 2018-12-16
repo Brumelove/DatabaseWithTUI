@@ -2,6 +2,41 @@
 public class CodeItem {
   private String codetext;
   private int id;
+  private boolean finalScene;
+  private int nextSymbolID;
+  private String nextMarkerText;
+
+  public String getNextMarkerText()
+  {
+    return this.nextMarkerText;
+  }
+
+  public boolean getFinalScene()
+  {
+    return this.finalScene;
+  }
+
+  public void setFinalScene(boolean finalScene)
+  {
+    this.finalScene = finalScene;
+  }
+
+
+  public void setNextMarkerText(String nextMarkerText)
+  {
+    this.nextMarkerText = nextMarkerText;
+  }
+
+  public int getNextSymbolId()
+  {
+    return this.nextSymbolID;
+  }
+
+  public void setNextSymbolId(int nextSymbolID)
+  {
+    this.nextSymbolID = nextSymbolID;
+  }
+
 
 
   public CodeItem(int id, String codetext) {
@@ -50,6 +85,9 @@ public class CodeDataSource {
       for (int code = 0; code < jsonObject.size(); code++) {
         JSONObject currentCodeObject = jsonObject.getJSONObject(code);
         CodeItem item = new CodeItem(currentCodeObject.getInt("id"), currentCodeObject.getString("code"));
+        item.setFinalScene(currentCodeObject.getBoolean("finalScene"));
+        item.setNextMarkerText(currentCodeObject.getString("nextMarkerText"));
+        item.setNextSymbolId(currentCodeObject.getInt("nextSymbolID"));
         hashMapData.put(item.getId(), item);
       }
     }

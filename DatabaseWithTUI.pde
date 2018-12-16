@@ -29,7 +29,7 @@ Minim minim;
 
 AudioPlayer bootPlayer;
 AudioPlayer musicPlayer;
-int num_sound = 2;
+
 
 void setup() {
 

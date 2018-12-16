@@ -2,6 +2,9 @@
     {
         "id": 3,
         "symbolID": 3,
-        "code": "insert into contacts values (8, 'Brume','Love','okeoeswo@gmail.com','08187428907');"
+        "code": "INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY) VALUES ('Allen', 25, 'Texas', 15000.00 );",
+        "nextMarkerText": "The Next Marker is now to create a Table in the Application",
+        "nextSymbolID": 8,
+        "finalScene": false
     }
 ]

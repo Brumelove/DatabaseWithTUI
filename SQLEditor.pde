@@ -1,4 +1,4 @@
-public class SQLEditor implements IScene {
+public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   // Markers
   private final int MARKER_RUN_SQL_EXECUTE = 5;
@@ -11,7 +11,7 @@ public class SQLEditor implements IScene {
   private final float RUNBUTTON_PADDING_RIGHT_OFFSET = BUTTON_WIDTH + 20; // Extra 50 margin
   private final float BORDER_RADIUS = 5;
   private final float CODE_EDITOR_Y_OFFSET = HEADER_HEIGHT + 2; // the 2 px will be used to render a rect to serve as a border for the header section
-  private final float MARGIN_BETWEEN_SCREEN = (width / 2) - 25; // Each distance between the screens will be 50
+  private final float MARGIN_BETWEEN_SCREEN = width; // Each distance between the screens will be 50
   private final float CODE_TEXT_SIZE = 14;
   private final float CODE_EDITOR_PADDING_LEFT = 40;
   private final float CODE_EDITOR_PADDING_TOP = CODE_EDITOR_Y_OFFSET + 30 + CODE_TEXT_SIZE;
@@ -22,6 +22,8 @@ public class SQLEditor implements IScene {
 
   private final float CODE_STATUS_OFFSET_Y = height;
   private final float CODE_STATUS_HEIGHT = 50;
+  public ModalWindow modal;
+  private CodeItem previousItem;
 
 
   private String errorMessageText;
@@ -36,40 +38,32 @@ public class SQLEditor implements IScene {
 
 
   public SQLEditor() {
+    modal = new ModalWindow();
   }
- //<>// //<>//
+  //<>//
   public void render() {
     renderHeader();
     image(pg, 0, 0);
-  } //<>// //<>//
+  } //<>//
 
   public void load() {
     musicPlayer = minim.loadFile("assets/audio/2.mp3");
-    musicPlayer.loop();
-    try {
-      renderERD();
-    }
-    catch(SQLException e)
-    {
-      println(e.getMessage());
-    }
+    // musicPlayer.loop();
   } 
 
-  public void unload() { //<>// //<>// //<>//
+  public void unload() { //<>// //<>//
     //Unload the image
-  } //<>// //<>//
+  } //<>//
 
-  public void addTuioObjectHook(TuioObject tobj) { //<>// //<>//
-    int millis = millis();
-    if ( millis >= shouldElapse && isSuccessful) {
-      shouldElapse = 0;
-      isSuccessful = false;
-    }
+  public void addTuioObjectHook(TuioObject tobj) { //<>//
+    int fudicialMarkerDisplayed = tobj.getSymbolID(); 
+
     if (!isSuccessful) {
-      int fudicialMarkerDisplayed = tobj.getSymbolID(); 
+
       if ( fudicialMarkerDisplayed != MARKER_RUN_SQL_EXECUTE) {
         CodeItem item = codeDataSource.getTextById(fudicialMarkerDisplayed);
         if (item != null) {
+          previousItem = item;
           codeText = item.getCodeText();
         }
       } else {
@@ -79,7 +73,9 @@ public class SQLEditor implements IScene {
           int result = sqlservice.execute(codeText);
           if (result == 1) {
             isSuccessful = true;
-            shouldElapse = millis() + 50000; // 50 Seconds
+            shouldElapse = millis() * 8; // 15 Seconds
+            modal.setData("Query Successful", previousItem.getNextMarkerText());
+            modal.display(true);
           }
         }
         catch(SQLException e) {
@@ -88,10 +84,25 @@ public class SQLEditor implements IScene {
           println(e.getMessage());
         }
       }
-
-      // let's update the loop once
-      redraw();
     }
+    
+    if(isWaitingForNextMarker()){
+       // We need to check for the last previous Marker
+       int newMarkerSymbol = previousItem.getNextSymbolId();
+       if(newMarkerSymbol != fudicialMarkerDisplayed)
+       {
+         println("Wrong Marker Displayed"); 
+       }
+       else{
+         clearScreen(); // Clears the screen 
+       }
+    }
+  }
+
+  public void clearScreen() {
+    codeText="";
+    isSuccessful = false;
+    modal.hide();
   }
 
   public void removeTuioObjectHook(TuioObject tobj) {
@@ -147,6 +158,10 @@ public class SQLEditor implements IScene {
     if (isSuccessful) {
       renderStatusBar("success", "The Query has been executed successfully");
     }
+
+    if (modal.shouldRender) {
+      modal.show();
+    }
   }
 
   public void renderHeaderTitle() {
@@ -175,6 +190,10 @@ public class SQLEditor implements IScene {
     pg.textFont(font);
     pg.text("Run", offset + 20, HEADER_TOP_PADDING + (BUTTON_HEIGHT - 40));
     pg.endDraw();
+  }
+
+  private boolean isWaitingForNextMarker() {
+    return (modal.shouldRender && isSuccessful);
   }
 
   public void renderCodeEditor() {
@@ -224,6 +243,8 @@ public class SQLEditor implements IScene {
     }
   }
 
+
+
   public void renderSingleErd(TableObject table, int index, int noOfColumns) {
     pg.beginDraw();
     float calculatedHeight = (noOfColumns * 25) + 45;
@@ -246,14 +267,61 @@ public class SQLEditor implements IScene {
     while (columnIterator.hasNext()) {
       float columnOffsetY = (yOffset + (columnCount * 25) + 30);
       String columnName = (String) columnIterator.next();
-      if(table.hasFK() && table.isFK(columnName)){
+      if (table.hasFK() && table.isFK(columnName)) {
         pg.text(columnName + "- FK", xOffset + 15, columnOffsetY);
-      }else{
+      } else {
         pg.text(columnName, xOffset + 15, columnOffsetY);
       }
-      
+
       columnCount++;
     }
     pg.endDraw();
+  }
+}
+
+class ModalWindow {
+  public boolean shouldRender = false; // Cause the class not to render depending on the state
+  private String title;
+  private String message;
+  public ModalWindow() {
+  }
+
+  public void setData(String title, String message) {
+    this.title = title;
+    this.message = message;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void display(boolean mode) {
+    shouldRender = mode;
+  }
+
+  public void show() {
+    if (shouldRender) {
+      int xOffset = (width / 2) - 200;
+      int yOffset = (height / 2) - 200;
+      pg.beginDraw();
+      pg.fill(colors.WHITISH);
+      pg.rect(xOffset, yOffset, 400, 400, 5);
+      pg.fill(colors.BLACK);
+      pg.textSize(32);
+      pg.text(title, xOffset + 20, yOffset + 30, 400, 400);
+      pg.textSize(14);
+      pg.text(message, xOffset + 25, yOffset + 105, 400-50, 400);
+      pg.endDraw();
+    }
+  }
+
+
+
+  public void hide() {
+    shouldRender = false;
   }
 }

@@ -6,8 +6,7 @@ public class InstructionScene implements IScene {
 
   public void render() {
     image(menuImage, 0, 0);
-    print(sceneManager);
-    noLoop();
+      
   }
 
   public void load() {
