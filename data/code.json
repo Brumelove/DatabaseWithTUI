@@ -5,6 +5,6 @@
         "code": "INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY) VALUES ('Allen', 25, 'Texas', 15000.00 );",
         "nextMarkerText": "The Next Marker is now to create a Table in the Application",
         "nextSymbolID": 8,
-        "finalScene": false
+        "finalScene": false 
     }
 ]

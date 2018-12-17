@@ -44,12 +44,6 @@ void setup() {
   sceneManager = new SceneManager();
   scene = new SplashScreen();
 
-
-
-
-
-
-
   codeDataSource.parse();
   colors = new Colors();
   size(1280, 720);
