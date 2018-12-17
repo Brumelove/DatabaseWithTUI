@@ -1,4 +1,4 @@
-public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   // Markers
   private final int MARKER_RUN_SQL_EXECUTE = 5;
@@ -24,8 +24,8 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
   private final float CODE_STATUS_HEIGHT = 50;
   public ModalWindow modal;
   private CodeItem previousItem;
-
-
+  private AudioPlayer fanFareSong;
+  private AudioPlayer errorSong;
   private String errorMessageText;
 
 
@@ -48,7 +48,10 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
 
   public void load() {
     musicPlayer = minim.loadFile("assets/audio/2.mp3");
-    // musicPlayer.loop();
+    musicPlayer.loop();
+    // Load the Success sound to tbe played
+    fanFareSong = minim.loadFile("assets/audio/fanfare.mp3");
+    errorSong = minim.loadFile("assets/audio/error.mp3");
   } 
 
   public void unload() { //<>// //<>//
@@ -76,26 +79,33 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
             shouldElapse = millis() * 8; // 15 Seconds
             modal.setData("Query Successful", previousItem.getNextMarkerText());
             modal.display(true);
+            fanFareSong.play();
           }
         }
         catch(SQLException e) {
           shouldRenderStatusBar = true;
           errorMessageText = e.getMessage();
+          errorSong.play();
           println(e.getMessage());
         }
       }
     }
-    
-    if(isWaitingForNextMarker()){
-       // We need to check for the last previous Marker
-       int newMarkerSymbol = previousItem.getNextSymbolId();
-       if(newMarkerSymbol != fudicialMarkerDisplayed)
-       {
-         println("Wrong Marker Displayed"); 
-       }
-       else{
-         clearScreen(); // Clears the screen 
-       }
+
+    if (isWaitingForNextMarker()) {
+      // We need to check for the last previous Marker
+      int newMarkerSymbol = previousItem.getNextSymbolId();
+      if (newMarkerSymbol != fudicialMarkerDisplayed)
+      {
+        println("Wrong Marker Displayed");
+      } else {
+        boolean isFinalScene = previousItem.getFinalScene();
+        if (isFinalScene) {  
+          FinalScene finalScene = new FinalScene();
+          sceneManager.setScene(finalScene);
+        } else {
+          clearScreen(); // Clears the screen
+        }
+      }
     }
   }
 
@@ -227,54 +237,6 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
     pg.rect(0, (CODE_STATUS_OFFSET_Y - CODE_STATUS_HEIGHT), width, CODE_STATUS_HEIGHT);
     pg.fill(colors.WHITE);
     pg.text(message, 50, (CODE_STATUS_OFFSET_Y - CODE_STATUS_HEIGHT) + 30 );
-    pg.endDraw();
-  }
-
-  public void renderERD() throws SQLException {
-    sqlservice.readAllDatabase();
-    int indexCount = 0;
-    //Iterate all over the diagram and draw
-    Iterator<TableObject> iterator = tableManager.tableArray.iterator();
-    while (iterator.hasNext()) {
-      TableObject tableObjectRenderable = iterator.next();
-      int sizeofColumns = tableObjectRenderable.columnNames.size();
-      renderSingleErd(tableObjectRenderable, indexCount, sizeofColumns);
-      indexCount++; // Increment count
-    }
-  }
-
-
-
-  public void renderSingleErd(TableObject table, int index, int noOfColumns) {
-    pg.beginDraw();
-    float calculatedHeight = (noOfColumns * 25) + 45;
-    float xOffset = (MARGIN_BETWEEN_SCREEN + (index * ERD_UI_WIDTH)) + (index == 0 ? DISTANCE_BETWEEN_ERD / 2 : index * DISTANCE_BETWEEN_ERD);
-    float yOffset = CODE_EDITOR_Y_OFFSET + 30;
-    pg.fill(colors.WHITISH);
-    pg.textSize(ERD_FONT_SIZE);
-
-    // Render the ERD BOX
-    pg.rect( xOffset, yOffset, ERD_UI_WIDTH, calculatedHeight, 5);
-    pg.fill(colors.BLACK);
-
-    // Render the ERD Tabe Name and Line
-    pg.text(table.getName(), xOffset + 20, yOffset + 22.5);
-    pg.line(xOffset, yOffset + 35, xOffset+ERD_UI_WIDTH, yOffset + 35);
-
-    // Render the Column names
-    int columnCount = 1;
-    Iterator columnIterator = table.columnNames.iterator();
-    while (columnIterator.hasNext()) {
-      float columnOffsetY = (yOffset + (columnCount * 25) + 30);
-      String columnName = (String) columnIterator.next();
-      if (table.hasFK() && table.isFK(columnName)) {
-        pg.text(columnName + "- FK", xOffset + 15, columnOffsetY);
-      } else {
-        pg.text(columnName, xOffset + 15, columnOffsetY);
-      }
-
-      columnCount++;
-    }
     pg.endDraw();
   }
 }
