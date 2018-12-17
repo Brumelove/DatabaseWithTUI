@@ -25,7 +25,7 @@ public class SplashScreen implements IScene {
     loop();
     timerTick = millis() * 5;
     menuImage = loadImage("assets/ui/splash.jpg");
-    //bootPlayer.play();
+    bootPlayer.play();
   
   }
 
