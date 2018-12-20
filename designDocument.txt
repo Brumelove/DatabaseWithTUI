@@ -11,3 +11,13 @@ Libraries Used
 
 SQLite
 Minim
+
+Json Configuration
+
+"id": // practically useless 
+"symbolID": // The marker ID to display the code in the application
+"code": // This is the SQL Text that will be executed
+"nextMarkerText": // This displays the next instruction to be displayed after a successful 
+"nextSymbolID": // This MarkerID will allow the application to proceed once the marker is presented
+"finalScene": // This marks this as the final scene , after this it renders the ERD
+"isDummyData": // This avoids executing against the SQL Engine

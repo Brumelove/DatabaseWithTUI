@@ -6,7 +6,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
   private final float HEADER_HEIGHT = 62;
   private final float HEADER_TOP_PADDING = HEADER_HEIGHT / 2;
   private final float HEADER_LEFT_PADDING = 20;
-  private final float BUTTON_WIDTH = 76;
+  private final float BUTTON_WIDTH = 100;
   private final float BUTTON_HEIGHT = 46;
   private final float RUNBUTTON_PADDING_RIGHT_OFFSET = BUTTON_WIDTH + 20; // Extra 50 margin
   private final float BORDER_RADIUS = 5;
@@ -205,7 +205,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
     pg.fill(colors.WHITE);
     font = createFont("Consolas", 19);
     pg.textFont(font);
-    pg.text("Run", offset + 20, HEADER_TOP_PADDING + (BUTTON_HEIGHT - 40));
+    pg.text("Run with ID 5", offset + 20, HEADER_TOP_PADDING + (BUTTON_HEIGHT - 40));
     pg.endDraw();
   }
 
