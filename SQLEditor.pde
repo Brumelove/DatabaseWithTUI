@@ -1,4 +1,4 @@
-public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   // Markers
   private final int MARKER_RUN_SQL_EXECUTE = 5;
@@ -6,7 +6,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
   private final float HEADER_HEIGHT = 62;
   private final float HEADER_TOP_PADDING = HEADER_HEIGHT / 2;
   private final float HEADER_LEFT_PADDING = 20;
-  private final float BUTTON_WIDTH = 100;
+  private final float BUTTON_WIDTH = 180;
   private final float BUTTON_HEIGHT = 46;
   private final float RUNBUTTON_PADDING_RIGHT_OFFSET = BUTTON_WIDTH + 20; // Extra 50 margin
   private final float BORDER_RADIUS = 5;
