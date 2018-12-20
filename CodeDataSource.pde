@@ -5,6 +5,7 @@ public class CodeItem {
   private boolean finalScene;
   private int nextSymbolID;
   private String nextMarkerText;
+  private boolean isDummy;
 
   public String getNextMarkerText()
   {
@@ -16,9 +17,18 @@ public class CodeItem {
     return this.finalScene;
   }
 
+ 
   public void setFinalScene(boolean finalScene)
   {
     this.finalScene = finalScene;
+  }
+
+  public boolean getIsDummy(){
+    return isDummy;
+  }
+
+  public void setIsDummy(boolean isDummy){
+    this.isDummy = isDummy;
   }
 
 
@@ -88,6 +98,7 @@ public class CodeDataSource {
         item.setFinalScene(currentCodeObject.getBoolean("finalScene"));
         item.setNextMarkerText(currentCodeObject.getString("nextMarkerText"));
         item.setNextSymbolId(currentCodeObject.getInt("nextSymbolID"));
+        item.setIsDummy(currentCodeObject.getBoolean("isDummyData"));
         hashMapData.put(item.getId(), item);
       }
     }

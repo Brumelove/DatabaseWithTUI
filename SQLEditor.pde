@@ -1,4 +1,4 @@
-public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   // Markers
   private final int MARKER_RUN_SQL_EXECUTE = 5;
@@ -40,11 +40,11 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
   public SQLEditor() {
     modal = new ModalWindow();
   }
-  //<>//
+
   public void render() {
     renderHeader();
     image(pg, 0, 0);
-  } //<>//
+  }
 
   public void load() {
     musicPlayer = minim.loadFile("assets/audio/2.mp3");
@@ -54,11 +54,11 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
     errorSong = minim.loadFile("assets/audio/error.mp3");
   } 
 
-  public void unload() { //<>// //<>//
+  public void unload() { //<>//
     //Unload the image
-  } //<>//
+  }
 
-  public void addTuioObjectHook(TuioObject tobj) { //<>//
+  public void addTuioObjectHook(TuioObject tobj) {
     int fudicialMarkerDisplayed = tobj.getSymbolID(); 
 
     if (!isSuccessful) {
@@ -72,8 +72,15 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
       } else {
         // Execute the statement
         try {
+          int result;
           println("Execution Query");
-          int result = sqlservice.execute(codeText);
+          if (previousItem.getIsDummy()) {
+            result = 1;
+            println("Dummy Data");
+          } else {
+            result = sqlservice.execute(codeText);
+          }
+
           if (result == 1) {
             isSuccessful = true;
             shouldElapse = millis() * 8; // 15 Seconds
