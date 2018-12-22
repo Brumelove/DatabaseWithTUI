@@ -36,8 +36,6 @@ void setup() {
   minim = new Minim(this);
   bootPlayer = minim.loadFile("assets/audio/1.mp3");
 
-
-
   client=new TuioProcessing(this); //Instantiate the TUIO Client Library on this Application
   tuioCodeService = new TuioCodeService();
   codeDataSource = new CodeDataSource();

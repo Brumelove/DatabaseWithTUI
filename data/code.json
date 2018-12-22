@@ -2,8 +2,8 @@
     {
         "id": 3,
         "symbolID": 3,
-        "code": "FAKE CREATE DATABASE",
-        "nextMarkerText": "The Next Marker is now to create a Table in the Application",
+        "code": "FAKE CREATE DATABASE Novel_Technology",
+        "nextMarkerText": "The Next Marker is now to create the first Table(with rows and columns) for our Database",
         "nextSymbolID": 4,
         "finalScene": false,
         "isDummyData": true 
@@ -11,10 +11,21 @@
     {
         "id": 4,
         "symbolID": 4,
-        "code": "FAKE CREATE DATABASE",
-        "nextMarkerText": "The Next Marker is now to create a Table in the Application",
-        "nextSymbolID": 8,
+        "code": "CREATE TABLE \`NoVelTech\` (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `CourseTitle` TEXT NOT NULL,`StudentID`	TEXT NOT NULL,`CourseCode` TEXT NOT NULL );",
+        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "nextSymbolID": 6,
         "finalScene": false,
         "isDummyData": true 
+    },
+    
+    {
+        "id": 8,
+        "symbolID": 8,
+        "code": "Drop Table Team",
+        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "nextSymbolID": 9,
+        "finalScene": true,
+        "isDummyData": true  
     }
+    
 ]
