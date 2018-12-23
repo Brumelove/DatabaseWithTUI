@@ -2,7 +2,7 @@
     {
         "id": 3,
         "symbolID": 3,
-        "code": "FAKE CREATE DATABASE Novel_Technology",
+        "code": "FAKE CREATE DATABASE `Novel_Technology`",
         "nextMarkerText": "The Next Marker is now to create the first Table(with rows and columns) for our Database",
         "nextSymbolID": 4,
         "finalScene": false,
@@ -11,13 +11,30 @@
     {
         "id": 4,
         "symbolID": 4,
-        "code": "CREATE TABLE \`NoVelTech\` (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `CourseTitle` TEXT NOT NULL,`StudentID`	TEXT NOT NULL,`CourseCode` TEXT NOT NULL );",
+        "code": "CREATE TABLE `NoVelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n  `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL );",
         "nextMarkerText": "The Next Marker is now to create the second Table",
         "nextSymbolID": 6,
         "finalScene": false,
         "isDummyData": true 
     },
-    
+    {
+        "id": 6,
+        "symbolID": 6,
+        "code": "CREATE TABLE `Student` \n(`StudentID` TEXT NOT NULL UNIQUE,\n `StudentName` TEXT NOT NULL,\n `CourseCode` TEXT NOT NULL UNIQUE,\n PRIMARY KEY( StudentID ) );",
+        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "nextSymbolID": 7,
+        "finalScene": false,
+        "isDummyData": true 
+    },
+    {
+        "id": 7,
+        "symbolID": 7,
+        "code": "CREATE TABLE `TeamWork`\n (`TeamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n`TeamName` TEXT NOT NULL, `TeamNumber `INTEGER NOT NULL,\n `StudentID` TEXT NOT NULL UNIQUE );",
+        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "nextSymbolID": 8,
+        "finalScene": false,
+        "isDummyData": true  
+    },
     {
         "id": 8,
         "symbolID": 8,
