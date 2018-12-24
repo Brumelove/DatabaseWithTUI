@@ -11,7 +11,7 @@
     {
         "id": 4,
         "symbolID": 4,
-        "code": "CREATE TABLE `NoVelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL );",
+        "code": "CREATE TABLE `NovelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL );",
         "nextMarkerText": "Very well, Face the yellow object to the other side and display to the camera to create our second Table",
         "nextSymbolID": 6,
         "finalScene": false,
