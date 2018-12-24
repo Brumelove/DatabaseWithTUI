@@ -3,7 +3,7 @@
         "id": 3,
         "symbolID": 3,
         "code": "FAKE CREATE DATABASE `Novel_Technology`",
-        "nextMarkerText": "The Next Marker is now to create the first Table(with rows and columns) for our Database",
+        "nextMarkerText": "Welldone, Now select the yellow object and face to the camera to create your first Table(with rows and columns) for our Database",
         "nextSymbolID": 4,
         "finalScene": false,
         "isDummyData": true 
@@ -11,8 +11,8 @@
     {
         "id": 4,
         "symbolID": 4,
-        "code": "CREATE TABLE `NoVelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n  `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL );",
-        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "code": "CREATE TABLE `NoVelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL );",
+        "nextMarkerText": "Very well, Face the yellow object to the other side and display to the camera to create our second Table",
         "nextSymbolID": 6,
         "finalScene": false,
         "isDummyData": true 
@@ -20,8 +20,8 @@
     {
         "id": 6,
         "symbolID": 6,
-        "code": "CREATE TABLE `Student` \n(`StudentID` TEXT NOT NULL UNIQUE,\n `StudentName` TEXT NOT NULL,\n `CourseCode` TEXT NOT NULL UNIQUE,\n PRIMARY KEY( StudentID ) );",
-        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "code": "CREATE TABLE `Student` \n (`StudentID` TEXT NOT NULL UNIQUE,\n `StudentName` TEXT NOT NULL, \n `CourseCode` TEXT NOT NULL UNIQUE,\n PRIMARY KEY( StudentID ) );",
+        "nextMarkerText": "Yippie! Its time for creating your last table, please select the white object and face the camera",
         "nextSymbolID": 7,
         "finalScene": false,
         "isDummyData": true 
@@ -29,8 +29,8 @@
     {
         "id": 7,
         "symbolID": 7,
-        "code": "CREATE TABLE `TeamWork`\n (`TeamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n`TeamName` TEXT NOT NULL, `TeamNumber `INTEGER NOT NULL,\n `StudentID` TEXT NOT NULL UNIQUE );",
-        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "code": "CREATE TABLE `TeamWork` ( \n`TeamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n`TeamName` TEXT NOT NULL,\n `TeamNumber `INTEGER NOT NULL,\n `StudentID` TEXT NOT NULL UNIQUE );",
+        "nextMarkerText": "Welldone Champ! you have succesfully created three tables, To drop a table flip the white object to the other side",
         "nextSymbolID": 8,
         "finalScene": false,
         "isDummyData": true  
@@ -38,8 +38,8 @@
     {
         "id": 8,
         "symbolID": 8,
-        "code": "Drop Table Team",
-        "nextMarkerText": "The Next Marker is now to create the second Table",
+        "code": "Drop Table TeamWork",
+        "nextMarkerText": "This is amazing! Do you know that there is a relationship between the three table you created? \n An Entity-Relational Diagram(ERD) shows relationships between tables \n using the field that uniquely identifies a table called the Primary key \n and a field in that same table that uniquely identifies \n another table called the Foreign Key of each of the table. To see this happen pick up the RED object and face it to the camera",
         "nextSymbolID": 9,
         "finalScene": true,
         "isDummyData": true  

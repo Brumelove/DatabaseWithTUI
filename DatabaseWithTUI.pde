@@ -1,4 +1,11 @@
-import org.sqlite.*; //<>//
+import ddf.minim.*; //<>//
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+import org.sqlite.*;
 import org.sqlite.core.*;
 import org.sqlite.util.*;
 import org.sqlite.date.*;
