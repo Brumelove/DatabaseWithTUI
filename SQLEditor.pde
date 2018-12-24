@@ -47,8 +47,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
   }
 
   public void load() {
-    minim = new Minim(this);
-    musicPlayer = minim.loadFile("assets/audio/2.mp3");
+    musicPlayer = minim.loadFile(sketchPath("assets/audio/")+"2.mp3");
     musicPlayer.loop();
     // Load the Success sound to tbe played
     fanFareSong = minim.loadFile("assets/audio/fanfare.mp3");
