@@ -60,7 +60,12 @@ public class FinalScene implements IScene {
       float columnOffsetY = (yOffset + (columnCount * 25) + 30);
       String columnName = (String) columnIterator.next();
       if (table.hasFK() && table.isFK(columnName)) {
-        pg.text(columnName + "- FK", xOffset + 15, columnOffsetY);
+        
+        // Let's paint the text color to be something different
+        pg.fill(colors.GREEN);
+        pg.text(columnName, xOffset + 15, columnOffsetY);
+        //revert the color for the next field
+        pg.fill(colors.BLACK);
       } else {
         pg.text(columnName, xOffset + 15, columnOffsetY);
       }
