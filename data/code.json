@@ -2,7 +2,7 @@
     {
         "id": 3,
         "symbolID": 3,
-        "code": "FAKE CREATE DATABASE `Novel_Technology`",
+        "code": "FAKE CREATE DATABASE `test`",
         "nextMarkerText": "Welldone, Now select the yellow object and face to the camera to create your first Table(with rows and columns) for our Database",
         "nextSymbolID": 4,
         "finalScene": false,
@@ -11,7 +11,7 @@
     {
         "id": 4,
         "symbolID": 4,
-        "code": "CREATE TABLE `NovelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL );",
+        "code": "CREATE TABLE `NovelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL,`TeamID`	INTEGER,\n FOREIGN KEY (TeamID) REFERENCES TeamWork(TeamID),\n FOREIGN KEY (StudentID) REFERENCES Students(StudentID) );",
         "nextMarkerText": "Very well, Face the yellow object to the other side and display to the camera to create our second Table",
         "nextSymbolID": 6,
         "finalScene": false,
@@ -20,7 +20,7 @@
     {
         "id": 6,
         "symbolID": 6,
-        "code": "CREATE TABLE `Student` \n (`StudentID` TEXT NOT NULL UNIQUE,\n `StudentName` TEXT NOT NULL, \n `CourseCode` TEXT NOT NULL UNIQUE,\n PRIMARY KEY( StudentID ) );",
+        "code": "CREATE TABLE `Students` \n (`StudentID` TEXT NOT NULL UNIQUE,\n `StudentName` TEXT NOT NULL, \n `CourseCode` TEXT NOT NULL UNIQUE,\n PRIMARY KEY( StudentID )\n FOREIGN KEY (CourseID) REFERENCES NovelTech(CourseID) );",
         "nextMarkerText": "Yippie! Its time for creating your last table, please select the white object and face the camera",
         "nextSymbolID": 7,
         "finalScene": false,
@@ -29,7 +29,7 @@
     {
         "id": 7,
         "symbolID": 7,
-        "code": "CREATE TABLE `TeamWork` ( \n`TeamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n`TeamName` TEXT NOT NULL,\n `TeamNumber `INTEGER NOT NULL,\n `StudentID` TEXT NOT NULL UNIQUE );",
+        "code": "CREATE TABLE `TeamWork` ( \n`TeamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n`TeamName` TEXT NOT NULL,\n `TeamNumber `INTEGER NOT NULL,\n `StudentID` TEXT NOT NULL UNIQUE,\n FOREIGN KEY (StudentID) REFERENCES Students(StdentID) );",
         "nextMarkerText": "Welldone Champ! you have succesfully created three tables, To drop a table flip the white object to the other side",
         "nextSymbolID": 8,
         "finalScene": false,
