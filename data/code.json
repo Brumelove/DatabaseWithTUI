@@ -1,5 +1,14 @@
 [
     {
+        "id": 1,
+        "symbolID": 1,
+        "code": "FAKE CREATE DATABASE `test`",
+        "nextMarkerText": "Welldone, Now select the yellow object and face to the camera to create your first Table(with rows and columns) for our Database",
+        "nextSymbolID": 3,
+        "finalScene": false,
+        "isDummyData": true 
+    },
+    {
         "id": 3,
         "symbolID": 3,
         "code": "FAKE CREATE DATABASE `test`",
@@ -11,7 +20,7 @@
     {
         "id": 4,
         "symbolID": 4,
-        "code": "CREATE TABLE `NovelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode`  TEXT NOT NULL,`TeamID`	INTEGER,\n FOREIGN KEY (TeamID) REFERENCES TeamWork(TeamID),\n FOREIGN KEY (StudentID) REFERENCES Students(StudentID) );",
+        "code": "CREATE TABLE `NovelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode` TEXT NOT NULL,`TeamID` INTEGER,\n FOREIGN KEY (TeamID) REFERENCES TeamWork(TeamID),\n FOREIGN KEY (StudentID) REFERENCES Students(StudentID) );",
         "nextMarkerText": "Very well, Face the yellow object to the other side and display to the camera to create our second Table",
         "nextSymbolID": 6,
         "finalScene": false,

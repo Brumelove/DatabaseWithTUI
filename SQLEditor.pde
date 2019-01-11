@@ -250,7 +250,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
 }
 
 class ModalWindow {
-  public boolean shouldRender = false; // Cause the class not to render depending on the state
+  public boolean shouldRender = false; // makes the class not to render depending on the state
   private String title = "";
   private String message = "";
   private final int HEADER_HEIGHT = 62;
