@@ -13,7 +13,9 @@ public class FinalScene implements IScene {
   public void render() {
     clear();
     renderERD();
+    renderText("Thilhlihadjlhgfligha8o khagdkjgasughdaiogha uaHDSLIGHASUIGDUIGAIOHDAD");
     image(pg, 0, 0);
+    
   }
 
   public void renderERD() {
@@ -32,6 +34,15 @@ public class FinalScene implements IScene {
       indexCount++; // Increment count
     }
 
+  }
+
+  public void renderText(String text){
+    pg.beginDraw();
+    pg.fill(colors.WHITE);
+    pg.rect(0, 400,width,height - 400);
+    pg.fill(colors.BLACK);
+    pg.text(text,20,420, width - 20, (height - 400) -20 );
+    pg.endDraw();
   }
 
 
