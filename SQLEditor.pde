@@ -1,4 +1,4 @@
-public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   // Markers
   private final int MARKER_RUN_SQL_EXECUTE = 5;
@@ -39,6 +39,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
 
   public SQLEditor() {
     modal = new ModalWindow();
+    modal.shouldRender = true;
   }
 
   public void render() {
@@ -53,7 +54,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
     fanFareSong = minim.loadFile("assets/audio/fanfare.mp3");
     errorSong = minim.loadFile("assets/audio/error.mp3");
   } 
-
+ //<>//
   public void unload() { //<>//
     //Unload the image
   }
@@ -250,8 +251,12 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
 
 class ModalWindow {
   public boolean shouldRender = false; // Cause the class not to render depending on the state
-  private String title;
-  private String message;
+  private String title = "";
+  private String message = "";
+  private final int HEADER_HEIGHT = 62;
+  private final int CODE_EDITOR_Y_OFFSET = HEADER_HEIGHT + 2; 
+
+
   public ModalWindow() {
   }
 
@@ -273,19 +278,19 @@ class ModalWindow {
   }
 
   public void show() {
-    if (shouldRender) {
-      int xOffset = (width / 2) - 200;
-      int yOffset = (height / 2) - 200;
+ 
+      int xOffset = (width) - 400;
+      int yOffset = CODE_EDITOR_Y_OFFSET;
       pg.beginDraw();
       pg.fill(colors.WHITISH);
-      pg.rect(xOffset, yOffset, 400, 400, 5);
+      pg.rect(xOffset, yOffset, 400, height, 0);
       pg.fill(colors.BLACK);
       pg.textSize(32);
       pg.text(title, xOffset + 20, yOffset + 30, 400, 400);
       pg.textSize(14);
       pg.text(message, xOffset + 25, yOffset + 105, 400-50, 400);
       pg.endDraw();
-    }
+    
   }
 
 
