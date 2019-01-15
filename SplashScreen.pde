@@ -1,9 +1,6 @@
 public class SplashScreen implements IScene {
 
   private PImage menuImage;
-  
-  private final int INSTRUCTION_PAGE_MARKER = 0;
-  private final int SQL_EDITOR_SCENE_MARKER = 1;
   private int timerTick = 0;
   
 
@@ -23,7 +20,7 @@ public class SplashScreen implements IScene {
   public void load() {
     // Load the image asset for the menu page
     loop();
-    timerTick = millis() * 2;
+    timerTick = millis() * 3;
     menuImage = loadImage("assets/ui/splash.jpg");
     bootPlayer.play();
   

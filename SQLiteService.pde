@@ -15,7 +15,7 @@ public class SQLiteService {
 
     try {
       Class.forName("org.sqlite.JDBC");
-      connection = DriverManager.getConnection("jdbc:sqlite:/test.db");
+      connection = DriverManager.getConnection("jdbc:sqlite:/home/brume/DatabaseWithTUI/test.db");
     }
     catch(SQLException e) {
       print(e.getMessage());

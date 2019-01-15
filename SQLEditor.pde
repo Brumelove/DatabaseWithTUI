@@ -1,4 +1,4 @@
-public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   // Markers
   private final int MARKER_RUN_SQL_EXECUTE = 5;
@@ -6,7 +6,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
   private final float HEADER_HEIGHT = 62;
   private final float HEADER_TOP_PADDING = HEADER_HEIGHT / 2;
   private final float HEADER_LEFT_PADDING = 20;
-  private final float BUTTON_WIDTH = 180;
+  private final float BUTTON_WIDTH = 320;
   private final float BUTTON_HEIGHT = 46;
   private final float RUNBUTTON_PADDING_RIGHT_OFFSET = BUTTON_WIDTH + 20; // Extra 50 margin
   private final float BORDER_RADIUS = 5;
@@ -54,8 +54,8 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
     fanFareSong = minim.loadFile("assets/audio/fanfare.mp3");
     errorSong = minim.loadFile("assets/audio/error.mp3");
   } 
- //<>//
-  public void unload() { //<>//
+ //<>// //<>//
+  public void unload() { //<>// //<>//
     //Unload the image
   }
 
@@ -84,7 +84,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
 
           if (result == 1) {
             isSuccessful = true;
-            shouldElapse = millis() * 8; // 15 Seconds
+            shouldElapse = millis() * 3; // 15 Seconds
             modal.setData("Query Successful", previousItem.getNextMarkerText());
             modal.display(true);
             fanFareSong.play();
@@ -206,7 +206,7 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
     pg.fill(colors.WHITE);
     font = createFont("Consolas", 19);
     pg.textFont(font);
-    pg.text("Run with ID 5", offset + 20, HEADER_TOP_PADDING + (BUTTON_HEIGHT - 40));
+    pg.text("Run with the object labelled A", offset + 10, HEADER_TOP_PADDING + (BUTTON_HEIGHT - 40));
     pg.endDraw();
   }
 
@@ -251,8 +251,8 @@ public class SQLEditor implements IScene { //<>// //<>// //<>// //<>// //<>// //
 
 class ModalWindow {
   public boolean shouldRender = false; // makes the class not to render depending on the state
-  private String title = "";
-  private String message = "";
+  private String title = "Let's do some learning.\n What is a Database?\n";
+  private String message = "A database is a collection of Information\n that is organized so that it can be easily accessed,managed and updated.\nInformations are stored in tables consisting of rows and columns.\nAs new informations are added,\n data in the tables are either updated or deleted.\n\nThe first step in creating a Database,\n is creating a container for the tables.\n Lets call this container `Middlesex University`.\nTo understand better,some codes have been put together for you.\n\nThere is a software by your left called reacTIVision,\ncan you see yourself from the software? very good!,Now select the blue object in your front, it has two faces, use the face labelled (3).\nFace the object to the camera and ensure the number (3)\n displays in the reactivision software., to run that code select the object labelled A and face it to the camera.";
   private final int HEADER_HEIGHT = 62;
   private final int CODE_EDITOR_Y_OFFSET = HEADER_HEIGHT + 2; 
 
@@ -285,10 +285,10 @@ class ModalWindow {
       pg.fill(colors.WHITISH);
       pg.rect(xOffset, yOffset, 400, height, 0);
       pg.fill(colors.BLACK);
-      pg.textSize(32);
+      pg.textSize(18);
       pg.text(title, xOffset + 20, yOffset + 30, 400, 400);
       pg.textSize(14);
-      pg.text(message, xOffset + 25, yOffset + 105, 400-50, 400);
+      pg.text(message, xOffset + 25, yOffset + 135, 400-50, 600);
       pg.endDraw();
     
   }

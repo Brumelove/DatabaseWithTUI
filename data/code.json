@@ -1,18 +1,9 @@
 [
     {
-        "id": 1,
-        "symbolID": 1,
-        "code": "FAKE CREATE DATABASE `test`",
-        "nextMarkerText": "Welldone, Now select the yellow object and face to the camera to create your first Table(with rows and columns) for our Database",
-        "nextSymbolID": 3,
-        "finalScene": false,
-        "isDummyData": true 
-    },
-    {
         "id": 3,
         "symbolID": 3,
-        "code": "FAKE CREATE DATABASE `test`",
-        "nextMarkerText": "Welldone, Now select the yellow object and face to the camera to create your first Table(with rows and columns) for our Database",
+        "code": "CREATE DATABASE `Middlesex University`;",
+        "nextMarkerText": "Welldone, That is the sql code for creating a Database(Our container).\nRemember we said that a Database stores its information in tables, and these tables have rows and columns?\n well, we are about to see the sql code for creating our first table.\nplease, select the yellow object and face to the camera to create your first Table(with rows and columns) for our Database, do not forget to run with the object labelled A",
         "nextSymbolID": 4,
         "finalScene": false,
         "isDummyData": true 
@@ -20,8 +11,8 @@
     {
         "id": 4,
         "symbolID": 4,
-        "code": "CREATE TABLE `NovelTech`\n (`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n `CourseCode` TEXT NOT NULL,`TeamID` INTEGER,\n FOREIGN KEY (TeamID) REFERENCES TeamWork(TeamID),\n FOREIGN KEY (StudentID) REFERENCES Students(StudentID) );",
-        "nextMarkerText": "Very well, Face the yellow object to the other side and display to the camera to create our second Table",
+        "code": "CREATE TABLE `Students` (\n`StudentID` TEXT NOT NULL UNIQUE,\n `StudentName` TEXT NOT NULL, \n `CourseID` TEXT NOT NULL UNIQUE,\n PRIMARY KEY( StudentID )\n FOREIGN KEY (CourseID) REFERENCES NovelTech(CourseID) );",
+        "nextMarkerText": "So our container `Middlesex University` now have students data, every student has a name, an ID that uniquely identifies them, and a course ID that identifies the course(s) a student offers. \n\nBut the table does not tell us anything about the course aside the ID, A second table that stores neccessary information on the offered course will be created, it will be called `NovelTech`.\n Flip the yellow object you used for the first table to the other oval side, and face to the camera, don't forget to run with the object labelled A.",
         "nextSymbolID": 6,
         "finalScene": false,
         "isDummyData": true 
@@ -29,17 +20,18 @@
     {
         "id": 6,
         "symbolID": 6,
-        "code": "CREATE TABLE `Students` \n (`StudentID` TEXT NOT NULL UNIQUE,\n `StudentName` TEXT NOT NULL, \n `CourseCode` TEXT NOT NULL UNIQUE,\n PRIMARY KEY( StudentID )\n FOREIGN KEY (CourseID) REFERENCES NovelTech(CourseID) );",
-        "nextMarkerText": "Yippie! Its time for creating your last table, please select the white object and face the camera",
+        "code": "CREATE TABLE `NovelTech` (\n`CourseID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n `CourseTitle` TEXT NOT NULL,\n `StudentID` TEXT NOT NULL,\n ,`TeamID` INTEGER,\n FOREIGN KEY (TeamID) REFERENCES TeamWork(TeamID),\n FOREIGN KEY (StudentID) REFERENCES Students(StudentID) );",
+        "nextMarkerText": "I am sure you are beginning to understand the basic concepts of our Database, The table you just created  has an ID that uniquely identifies the offered course it also has the title of the course, the student ID which was in the first table and a Team ID. Did you take note of the Foreign Keys(Student ID and Team ID)? Those are the ID's that uniquely identifies their tables, i will explain futher as we move on.\n\n Some of our coursework requires we have a team, like this tool you are using was desined by a team of 3, so it is important our container have details about each team relative to the offered course. That will be our last table for now, please pick the white object labelled 7 and repeat the same exercise of facing to the camera, and running with the object labelled A.",
         "nextSymbolID": 7,
         "finalScene": false,
         "isDummyData": true 
     },
+    
     {
         "id": 7,
         "symbolID": 7,
-        "code": "CREATE TABLE `TeamWork` ( \n`TeamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n`TeamName` TEXT NOT NULL,\n `TeamNumber `INTEGER NOT NULL,\n `StudentID` TEXT NOT NULL UNIQUE,\n FOREIGN KEY (StudentID) REFERENCES Students(StdentID) );",
-        "nextMarkerText": "Welldone Champ! you have succesfully created three tables, To drop a table flip the white object to the other side",
+        "code": "CREATE TABLE `TeamWork` (\n`TeamID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n`TeamName` TEXT NOT NULL,\n `TeamNumber `INTEGER NOT NULL,\n `StudentID` TEXT NOT NULL UNIQUE,\n FOREIGN KEY (StudentID) REFERENCES Students(StdentID) );",
+        "nextMarkerText": "Welldone Champ! you have succesfully created three tables, you now fully understand what a databse is and the code to crate it as well as that of a table(s). What if ou want to delete a table, you don't feel is longer important? you can do this with a simple command, flip the white object to the other side labelled 8 and face to the camera, do not foret to run with the object lbelled A.",
         "nextSymbolID": 8,
         "finalScene": false,
         "isDummyData": true  
