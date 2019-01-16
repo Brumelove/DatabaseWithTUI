@@ -13,7 +13,7 @@ public class FinalScene implements IScene {
   public void render() {
     clear();
     renderERD();
-    renderText("Thilhlihadjlhgfligha8o khagdkjgasughdaiogha uaHDSLIGHASUIGDUIGAIOHDAD");
+    renderText("These are the three tables you have created, Can you remember the relationship between the three table you created? \n Remember the unique identifies we spoke about when creating our tables? Well every table has a unique identify called a Primary Key, and might have a unque identifir of another table calle dthe foreign key, like in the case of our `Students` table,  student ID is its primary key and Course ID which is the primary key of our Novel Tech table the foreign Key.\n\n If you are not clear about what just happened please select the blue object labelled 1 and faceto the camera to start all over again, If you do, voila you are on your way to becoming a Database Ninja, Lets continue with LEVEL 2!!!!  An Entity-Relational Diagram(ERD) shows relationships between tables \n using the field that uniquely identifies a table called the Primary key \n and a field in that same table that uniquely identifies \n another table called the Foreign Key of each of the table. To see this happen pick up the RED object and face it to the camera");
     image(pg, 0, 0);
     
   }

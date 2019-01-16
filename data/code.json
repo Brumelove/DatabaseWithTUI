@@ -40,7 +40,7 @@
         "id": 8,
         "symbolID": 8,
         "code": "Drop Table TeamWork",
-        "nextMarkerText": "This is amazing! Do you know that there is a relationship between the three table you created? \n An Entity-Relational Diagram(ERD) shows relationships between tables \n using the field that uniquely identifies a table called the Primary key \n and a field in that same table that uniquely identifies \n another table called the Foreign Key of each of the table. To see this happen pick up the RED object and face it to the camera",
+        "nextMarkerText": "This is amazing! I am sure you will love to see a graphical representation of the tables you have created, swlect the yellow object E labelled 9 and face to the camera.",
         "nextSymbolID": 9,
         "finalScene": true,
         "isDummyData": true  

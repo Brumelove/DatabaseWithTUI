@@ -1,6 +1,9 @@
 public class SplashScreen implements IScene {
 
   private PImage menuImage;
+  
+  private final int INSTRUCTION_PAGE_MARKER = 0;
+  private final int SQL_EDITOR_SCENE_MARKER = 1;
   private int timerTick = 0;
   
 
